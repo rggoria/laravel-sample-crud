@@ -19,3 +19,6 @@ Route::get('/', [HomepageCntroller::class, 'index']);
 Route::get('/dashboard', [HomepageCntroller::class, 'getData'])->name('dashboard');
 Route::get('/add-form', [HomepageCntroller::class, 'addForm'])->name('form');
 Route::post('/add-form/insert', [HomepageCntroller::class, 'insertForm'])->name('insert');
+
+Route::get('/emailer', [HomepageCntroller::class, 'emailer'])->name('emailer');
+Route::post('/emailer/emailerSubmit', [HomepageCntroller::class, 'emailerSubmit'])->name('emailerSubmit');

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SampleEmailer;
 use DB;
 use Illuminate\Http\Request;
+use Mail;
 
 class HomepageCntroller extends Controller
 {
@@ -42,4 +44,21 @@ class HomepageCntroller extends Controller
             return back()->withErrors()->with('error', 'An error found');
         }
     }
+
+    public function emailer(){
+        return view('emailer');
+    }
+
+    public function emailerSubmit(Request $request) {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'contact' => 'required',
+        ]);
+
+        Mail::to($request->email)->send(new SampleEmailer($request->all()));
+        return redirect()->route('emailer')->with('success', 'Email Sent');
+
+    }
+
 }
