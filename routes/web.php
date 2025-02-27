@@ -17,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomepageCntroller::class, 'index']);
 Route::get('/dashboard', [HomepageCntroller::class, 'getData'])->name('dashboard');
-Route::get('/add-form', [HomepageCntroller::class, 'addForm'])->name('form');
+Route::get('/add-form', [HomepageCntroller::class, 'addForm'])->name('user.add');
 Route::post('/add-form/insert', [HomepageCntroller::class, 'insertForm'])->name('insert');
+Route::get('/edit-form/{id}', [HomepageCntroller::class, 'editForm'])->name('user.edit');
+Route::post('/edit-form/{id}/update', [HomepageCntroller::class, 'updateForm'])->name('user.update');
+Route::delete('/delete/{id}', [HomepageCntroller::class, 'delete'])->name('user.delete');
+
 
 Route::get('/emailer', [HomepageCntroller::class, 'emailer'])->name('emailer');
 Route::post('/emailer/emailerSubmit', [HomepageCntroller::class, 'emailerSubmit'])->name('emailerSubmit');

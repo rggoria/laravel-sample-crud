@@ -21,7 +21,6 @@
                         <form action="{{ route('emailerSubmit') }}" method="post">
                             @csrf
                             <div class="row mb-4">
-                                <!-- Name Field -->
                                 <div class="col-md-12">
                                     <label for="name" class="form-label text-dmb fw-bold">
                                         Name<span class="sup text-danger"> *</span>
@@ -34,7 +33,6 @@
                             </div>
                         
                             <div class="row mb-4">
-                                <!-- Email -->
                                 <div class="col-md-12">
                                     <label for="email" class="form-label text-dmb fw-bold">
                                         Email<span class="sup text-danger"> *</span>
@@ -47,7 +45,6 @@
                             </div>
                         
                             <div class="row mb-4">
-                                <!-- Contact Number Field -->
                                 <div class="col-md-12">
                                     <label for="contact" class="form-label text-dmb fw-bold">
                                         Contact Number<span class="sup text-danger"> *</span>

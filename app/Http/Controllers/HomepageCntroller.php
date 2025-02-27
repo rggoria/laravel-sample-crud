@@ -17,12 +17,12 @@ class HomepageCntroller extends Controller
         $data = DB::table('sample')->get();
         
         return view('dashboard', [
-            'data' => $data,
+            'sample' => $data,
         ]);
     }
 
     public function addForm() {
-        return view('form');
+        return view('addForm');
     }
 
     public function insertForm(Request $request) {
@@ -43,6 +43,46 @@ class HomepageCntroller extends Controller
         } else {
             return back()->withErrors()->with('error', 'An error found');
         }
+    }
+
+    public function editForm($id){
+
+        $user = DB::table('sample')->find($id);
+
+        return view('editForm', compact('user'));
+    }
+
+    public function updateForm(Request $request, $id){
+        $validated = $request->validate([
+            'name' => 'required',
+            'gender' => 'required',
+        ]);
+        $user = DB::table('sample')->find($id);
+        if ($user->name == $request->name && $user->gender == $request->gender) {
+            return back()->with('info', 'No Changes were made.');
+        }
+        $update = DB::table('sample')
+                    ->where('id', $id)
+                    ->update(
+                        [
+                            'name' => $request->name,
+                            'gender' => $request->gender,
+                        ]
+                        );
+        if ($update) {
+            return redirect()->route('dashboard')->with('success', 'User Updated');
+        } else {
+            return back()->withErrors()->with(['error' => 'An error occured']);
+        }
+    }
+
+    public function delete($id){
+        $user = DB::table('sample')->where('id', $id);
+        if ($user->exists()) {
+            $user->delete();
+            return redirect()->route('dashboard')->with('success', 'User Deleted');
+        }
+        return redirect()->route('dashboard')->with('error', 'User not found');
     }
 
     public function emailer(){
